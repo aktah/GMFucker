@@ -1,0 +1,22 @@
+Logger:
+  main:
+    LogLevel:
+      - Fatal
+      - Error
+      - Warning
+      - Info
+  systemlog:
+    LogLevel:
+      - Info
+      - Error
+  samp-server: # see "Server console redirection" down below
+    LogLevel: All
+LogLevel:
+  Fatal:
+    PrintToConsole: true
+  Error:
+    PrintToConsole: true
+  Warning:
+    PrintToConsole: true
+EnableColors: true
+LogTimeFormat: '%F %H:%M:%S'

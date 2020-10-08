@@ -1,0 +1,26 @@
+{
+	"user": "aktah",
+	"repo": "Y-Core",
+	"entry": "gamemodes\\ycore.pwn",
+	"output": "gamemodes\\ycore.amx",
+	"dependencies": [
+		"sampctl/samp-stdlib",
+		"Zeex/samp-plugin-crashdetect",
+		"Zeex/samp-plugin-jit",
+		"pawn-lang/YSI-Includes",
+		"pBlueG/SA-MP-MySQL",
+		"Sreyas-Sreelal/samp-bcrypt",
+		"aktah/cec",
+		"maddinat0r/sscanf",
+		"pawn-lang/sa-mp-fixes",
+		"maddinat0r/samp-log",
+		"samp-incognito/samp-streamer-plugin"
+	],
+	"local": true,
+	"runtime": {
+		"version": "0.3.7",
+		"mode": "server",
+		"rcon_password": "password",
+		"port": 7777
+	}
+}

@@ -1,0 +1,45 @@
+// #define Y_DEBUG
+
+// #define _DEBUG 7
+// #define RUN_TESTS
+
+#define MYSQL_HOST 		                "127.0.0.1"
+#define MYSQL_USER 		                ""
+#define MYSQL_PASSWORD 	                ""
+#define MYSQL_DB 		                "y"
+#define MYSQL_LOG                       WARNING | ERROR
+#define MYSQL_POOL_SIZE                 5
+#define MYSQL_CHARSET 	                "tis620"
+
+#define SERVER_NAME                     "Server name Multiplayer"
+#define SERVER_ALIAS                    "SN:MP"
+#define WEBSITE_URL 	                "yoursite.com"
+
+#define Y_PLAYER_IG_REGISTER_ACCOUNT    // สมัครบัญชีผู้ใช้ในเกม  
+#define Y_PLAYER_LOGIN_AFTER_REG        // ล็อกอินหลังสมัครบัญชี
+// #define Y_PLAYER_NO_MULTI_CHARACTER     // ไม่ใช้ระบบหลายตัวละคร
+#define Y_PLAYER_IG_REGISTER_CHARACTER  // สร้างตัวละครในเกม
+
+#define Y_PLAYER_MAX_CHARACTER 				      5
+#define Y_PLAYER_CHARACTER_NAME_MIN_PASS_LENGTH   4     // ความยาวน้อยสุดของชื่อ
+#define Y_PLAYER_CHARACTER_NAME_MAX_PASS_LENGTH   20    // ความยาวสูงสุดของชื่อ และต้องไม่เกิน 24
+#define Y_PLAYER_RESTRICT_NAME_FUNC "CharacaterRestrictName" // ฟังก์ชั่นตรวจชื่อ
+
+#define Y_PLAYER_REGISTRATION_MIN_PASS_LENGTH   4
+#define Y_PLAYER_REGISTRATION_MAX_PASS_LENGTH   16
+
+#define Y_PLAYER_LOGIN_MAX_ATTEMPTS     5
+#define Y_PLAYER_LOGIN_TIMEOUT_KICK     60
+#define Y_PLAYER_ADMIN_MAX_LEVEL        5
+#define Y_PLAYER_ADMIN_MANAGE_LEVEL     4
+#define Y_PLAYER_ADMIN_LEAD_LEVEL       3
+#define Y_PLAYER_ADMIN_STAFF_LEVEL      2
+
+#define Y_BCRYPT_WORK_FACTOR            12
+
+#define Y_DEFAULT_SPAWN_LOCATION_X		1642.2770
+#define Y_DEFAULT_SPAWN_LOCATION_Y		-2332.8931
+#define Y_DEFAULT_SPAWN_LOCATION_Z		-2.6797
+#define Y_DEFAULT_SPAWN_LOCATION_A		0.0
+#define Y_DEFAULT_SPAWN_WORLD           0
+#define Y_DEFAULT_SPAWN_INT             0
