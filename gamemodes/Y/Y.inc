@@ -12,6 +12,10 @@
 	#include "door\header"
 	#include "entities\header"
 
+	#if defined Y_FUCKER_GM
+		#include "fk\header"
+	#endif
+
 	#define Y_@@@@_HEADER
 #elseif !defined Y_@@@@_END
 	#include "core\impl"
@@ -22,6 +26,10 @@
 	
 	#include "door\impl"
 	#include "entities\impl"
+
+	#if defined Y_FUCKER_GM
+		#include "fk\impl"
+	#endif
 
 	#define Y_@@@@_END
 #else
