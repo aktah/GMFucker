@@ -20,6 +20,9 @@
 	#include <YSI_Core\y_testing>
 #endif
 
+#include <Pawn.RakNet>
+#include <io>
+
 #define cec_auto
 #include <cec>
 
