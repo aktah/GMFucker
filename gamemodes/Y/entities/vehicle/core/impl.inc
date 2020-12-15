@@ -36,9 +36,14 @@ CreateCoreVehicle(modelid, Float:x, Float:y, Float:z, Float:a = 0.0, color1 = -1
 		Vehicle.Meta[vehicleid][@siren] = addsiren;
 		Vehicle.Meta[vehicleid][@int] = int;
 		Vehicle.Meta[vehicleid][@world] = world;
-		Vehicle.Meta[vehicleid][@engine] = engineState;
+		
+		if (!IsBike(modelid)) Vehicle.Meta[vehicleid][@engine] = engineState;
+		else Vehicle.Meta[vehicleid][@engine] = true;
+
 		Vehicle.Meta[vehicleid][@light] = lightState;
 		Vehicle.Meta[vehicleid][@lock] = lockState;
+		Vehicle.Meta[vehicleid][@bonnet] = false;
+		Vehicle.Meta[vehicleid][@boot] = false;
 
 		strcpy(Vehicle.Meta[vehicleid][@plate], plate);
 
@@ -61,7 +66,7 @@ CreateCoreVehicle(modelid, Float:x, Float:y, Float:z, Float:a = 0.0, color1 = -1
 		;
 
 		GetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective);
-		SetVehicleParamsEx(vehicleid, engineState, lightState, alarm, lockState, bonnet, boot, objective);
+		SetVehicleParamsEx(vehicleid, Vehicle.Meta[vehicleid][@engine], lightState, alarm, lockState, bonnet, boot, objective);
 
 		SetVehicleNumberPlate(vehicleid, plate);
 		SetVehicleZAngle(vehicleid, a);
@@ -94,3 +99,16 @@ stock ReturnVehicleNameByModel(model)
 	format(name, sizeof(name), gVehicleNames[model - 400]);
 	return name;
 }
+
+stock IsBike(modelid)
+{
+    switch (modelid)
+    {
+        case 510,362,381,509: return true;
+        default: return false;
+	}
+	return false;
+}
+ 
+stock GetDoorState(doorStates, Door:door, DoorState:doorState)
+	return (doorStates >>> (8 * _:door)) & _:doorState;

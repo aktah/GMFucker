@@ -37,13 +37,13 @@ YCMD:exit(playerid, params[], help)
 forward OnPlayerEnter(playerid);
 public OnPlayerEnter(playerid)
 {
-	SendClientMessage(playerid, X11_GRAY_71, "   คุณไม่ได้อยู่ใกล้ทางเข้าใด ๆ");
+	SendClientMessage(playerid, X11_GRAY71, "   คุณไม่ได้อยู่ใกล้ทางเข้าใด ๆ");
 	return 1;
 }
 
 forward OnPlayerExit(playerid);
 public OnPlayerExit(playerid)
 {
-	SendClientMessage(playerid, X11_GRAY_71, "   คุณไม่ได้อยู่ใกล้ทางออกใด ๆ");
+	SendClientMessage(playerid, X11_GRAY71, "   คุณไม่ได้อยู่ใกล้ทางออกใด ๆ");
 	return 1;
 }

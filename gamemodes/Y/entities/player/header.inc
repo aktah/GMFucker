@@ -3,6 +3,7 @@
 #endif
 
 #include "core\header"
+#include "security\header"
 #include "auth\header"
 #include "login\header"
 #include "registration\header"

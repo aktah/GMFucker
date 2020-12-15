@@ -4,3 +4,4 @@
 
 #include "player\header"
 #include "vehicle\header"
+#include "checkpoint\header"

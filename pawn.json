@@ -6,7 +6,6 @@
 	"dependencies": [
 		"sampctl/samp-stdlib",
 		"Zeex/samp-plugin-crashdetect",
-		"Zeex/samp-plugin-jit",
 		"pawn-lang/YSI-Includes",
 		"pBlueG/SA-MP-MySQL",
 		"Sreyas-Sreelal/samp-bcrypt",

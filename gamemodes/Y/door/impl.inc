@@ -158,7 +158,7 @@ RenameDoor(playerid, doorid, bool:error = false)
 			@return 1;
 		}
 	
-		va_SendClientMessage(playerid, X11_GRAY_71, "Door#%d ถูกเปลี่ยนชื่อเป็น "LIGHTBLUE"%s", doorid, inputtext);
+		va_SendClientMessage(playerid, X11_GRAY71, "Door#%d ถูกเปลี่ยนชื่อเป็น "LIGHTBLUE"%s", doorid, inputtext);
 
 		strcpy(Door.Meta[doorid][@name], inputtext);
 
@@ -193,7 +193,7 @@ ChangeTypeDoor(playerid, doorid)
 		}
 
 		Door.Meta[doorid][@type] = listitem;
-		va_SendClientMessage(playerid, X11_GRAY_71, "Door#%d ถูกเปลี่ยนประเภทเป็น "LIGHTBLUE"%d", doorid, listitem);
+		va_SendClientMessage(playerid, X11_GRAY71, "Door#%d ถูกเปลี่ยนประเภทเป็น "LIGHTBLUE"%d", doorid, listitem);
 
 		switch(Door.Meta[doorid][@type]) {
 			case DOOR_TYPE_CP: {
@@ -259,7 +259,7 @@ SetPickUpDoor(playerid, doorid, type)
 		}
 
 		new pickupModel = strval(inputtext);
-		va_SendClientMessage(playerid, X11_GRAY_71, "Door#%d ถูกเปลี่ยน %s Pickup เป็น "LIGHTBLUE"%d", doorid, type == 0 ? ("Exterior") : ("Interior"), pickupModel);
+		va_SendClientMessage(playerid, X11_GRAY71, "Door#%d ถูกเปลี่ยน %s Pickup เป็น "LIGHTBLUE"%d", doorid, type == 0 ? ("Exterior") : ("Interior"), pickupModel);
 
 		if (type == 0) {
 			Door.Meta[doorid][@ePickupModel] = pickupModel;
@@ -329,9 +329,9 @@ SetLabelDoor(playerid, doorid, type, bool:error = false)
 		}
 
 		if (isnull(inputtext)) {
-			va_SendClientMessage(playerid, X11_GRAY_71, "Door#%d ถูกยกเลิก %s TextLabel", doorid, type == 0 ? ("Exterior") : ("Interior"));
+			va_SendClientMessage(playerid, X11_GRAY71, "Door#%d ถูกยกเลิก %s TextLabel", doorid, type == 0 ? ("Exterior") : ("Interior"));
 		} else {
-			va_SendClientMessage(playerid, X11_GRAY_71, "Door#%d ถูกเปลี่ยน %s TextLabel เป็น "LIGHTBLUE"%s", doorid, type == 0 ? ("Exterior") : ("Interior"), inputtext);
+			va_SendClientMessage(playerid, X11_GRAY71, "Door#%d ถูกเปลี่ยน %s TextLabel เป็น "LIGHTBLUE"%s", doorid, type == 0 ? ("Exterior") : ("Interior"), inputtext);
 		}
 
 		if (type == 0) {
@@ -417,9 +417,9 @@ SetGameTextDoor(playerid, doorid, type, bool:error = false)
 		}
 
 		if (isnull(inputtext)) {
-			va_SendClientMessage(playerid, X11_GRAY_71, "Door#%d ถูกยกเลิก %s GameText", doorid, type == 0 ? ("Exterior") : ("Interior"));
+			va_SendClientMessage(playerid, X11_GRAY71, "Door#%d ถูกยกเลิก %s GameText", doorid, type == 0 ? ("Exterior") : ("Interior"));
 		} else {
-			va_SendClientMessage(playerid, X11_GRAY_71, "Door#%d ถูกเปลี่ยน %s GameText เป็น "LIGHTBLUE"%s", doorid, type == 0 ? ("Exterior") : ("Interior"), inputtext);
+			va_SendClientMessage(playerid, X11_GRAY71, "Door#%d ถูกเปลี่ยน %s GameText เป็น "LIGHTBLUE"%s", doorid, type == 0 ? ("Exterior") : ("Interior"), inputtext);
 		}
 
 		if (type == 0) {
@@ -505,11 +505,11 @@ ChangeWorldDoor(playerid, doorid)
 		}
 
 		if (linkid == -1) {
-			va_SendClientMessage(playerid, X11_GRAY_71, "Door#%d ถูกยกเลิกการเชื่อมต่อ", doorid);
+			va_SendClientMessage(playerid, X11_GRAY71, "Door#%d ถูกยกเลิกการเชื่อมต่อ", doorid);
 			Door.Meta[doorid][@iWorld] = Y_DOOR_WORLD_OFFSET + _:Door.Meta[doorid][@id];
 		} else {
 			new linkworld = Door.Meta[linkid][@iWorld];
-			va_SendClientMessage(playerid, X11_GRAY_71, "Door#%d ถูกเชื่อมต่อกับ Door#%d "LIGHTBLUE"โลกจำลองที่ %d", doorid, linkid, linkworld);
+			va_SendClientMessage(playerid, X11_GRAY71, "Door#%d ถูกเชื่อมต่อกับ Door#%d "LIGHTBLUE"โลกจำลองที่ %d", doorid, linkid, linkworld);
 			Door.Meta[doorid][@iWorld] = linkworld;
 		}
 
@@ -536,7 +536,7 @@ SetPositionDoor(playerid, doorid, type)
 			@return 1;
 		}
 
-		va_SendClientMessage(playerid, X11_GRAY_71, "Door#%d ถูกเปลี่ยน "LIGHTBLUE"%s"GRAY71" มายังตำแหน่งปัจจุบันของคุณ", doorid, type == 0 ? ("Exterior") : ("Interior"));
+		va_SendClientMessage(playerid, X11_GRAY71, "Door#%d ถูกเปลี่ยน "LIGHTBLUE"%s"GRAY71" มายังตำแหน่งปัจจุบันของคุณ", doorid, type == 0 ? ("Exterior") : ("Interior"));
 
 		if (type == 0) {
 			GetPlayerPos(playerid, Door.Meta[doorid][@eX], Door.Meta[doorid][@eY], Door.Meta[doorid][@eZ]);
@@ -651,7 +651,7 @@ RemoveDoor(playerid, doorid)
 			Iter_Remove(IDoor, doorid);
 			@return ListDoors(playerid);
 		}
-		format(query, sizeof query, "DELETE FROM " DOOR_TABLE" WHERE id = %d", _:Door.Meta[doorid][@id]);
+		mysql_format(dbHandle, query, sizeof query, "DELETE FROM " DOOR_TABLE" WHERE id = %d", _:Door.Meta[doorid][@id]);
 		MySQL_TQueryInline(dbHandle, using inline HandleDoorRemove, query);
 		@return 1;
 	}
@@ -846,4 +846,18 @@ YCMD:createdoor(playerid, params[], help)
 	mysql_format(dbHandle, query, sizeof query, "INSERT INTO " DOOR_TABLE " (name,eX,eY,eZ,eA,eInt,eWorld)VALUES('%e',%f,%f,%f,%f,%i,%d)", params, pX, pY, pZ, pA, pInt, pWorld);
 	MySQL_PQueryInline(dbHandle, using inline DoorCreated, query);
 	return 1;
+}
+
+stock GetPlayerLocation(playerid, &Float:fX, &Float:fY, &Float:fZ)
+{
+    new id = -1;
+
+	if ((id = House_Inside(playerid)) != -1)
+    {
+        fX = House.Meta[id][@eX];
+        fY = House.Meta[id][@eY];
+        fZ = House.Meta[id][@eZ];
+    }
+    // ...
+    else GetPlayerPos(playerid, fX, fY, fZ);
 }

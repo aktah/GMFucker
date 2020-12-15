@@ -3,6 +3,7 @@
 #endif
 
 #include "core\impl"
+#include "security\impl"
 #include "auth\impl"
 #include "login\impl"
 #include "registration\impl"

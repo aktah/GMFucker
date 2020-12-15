@@ -7,7 +7,6 @@
 hook OnGameModeInit()
 {
 	Command_SetDeniedReturn(true);
-	Group_SetGlobalCommandDefault(false);
 	defer onAllInitiated();
 }
 

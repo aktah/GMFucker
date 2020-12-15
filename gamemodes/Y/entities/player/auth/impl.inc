@@ -17,8 +17,6 @@ hook OnPlayerConnect(playerid)
 	}
 	FetchPlayer(playerid);
 	SetSpawnInfo(playerid, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0);
-
-	SendClientMessage(playerid, -1, "ยินดีต้อนรับเข้าสู่ "ORANGE""SERVER_NAME"");
 	return 1;
 }
 
@@ -27,6 +25,13 @@ hook OnPlayerRequestClass(playerid, classid)
 	TogglePlayerSpectating(playerid, true);
 	return 1;
 }
+
+/* // When TogglePlayerSpectating false they already force to spawn
+hook OnPlayerSpawn(playerid, classid)
+{
+	TogglePlayerSpectating(playerid, false);
+	return 1;
+}*/
 
 FetchPlayer(playerid)
 {

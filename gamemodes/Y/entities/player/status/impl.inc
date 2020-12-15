@@ -15,9 +15,11 @@ hook OnPlayerLogin(playerid)
 		cache_get_value_name(0, "name", Player.Status[playerid][@name], MAX_PLAYER_NAME + 1);
 		cache_get_value_name_int(0, "vip", Player.Status[playerid][@vip]);
 		cache_get_value_name_int(0, "cash", Player.Status[playerid][@cash]);
+		cache_get_value_name_int(0, "bank", Player.Status[playerid][@bank]);
 		cache_get_value_name_int(0, "skin", Player.Status[playerid][@skin]);
 		cache_get_value_name_int(0, "admin", Player.Status[playerid][@admin]);
 		cache_get_value_name_int(0, "level", Player.Status[playerid][@level]);
+		cache_get_value_name_bool(0, "tutorial", Player.Status[playerid][@tutorial]);
 
 		if (Player.Status[playerid][@admin] > 0) {
 			Group_SetPlayer(AdminGroup[Player.Status[playerid][@admin] - 1], playerid, true);

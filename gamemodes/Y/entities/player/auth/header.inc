@@ -4,6 +4,7 @@
 
 #include <YSI_Players\y_groups>
 #include <YSI_Coding\y_inline>
+#include <YSI_Extra\y_inline_mysql>
 #include <YSI_Coding\y_timers>
 #include <YSI_Data\y_iterate>
 

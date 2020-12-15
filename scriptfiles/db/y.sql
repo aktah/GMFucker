@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 08, 2020 at 10:55 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.26
+-- Host: localhost
+-- Generation Time: Dec 15, 2020 at 04:43 PM
+-- Server version: 8.0.21
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -21,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `y`
 --
+CREATE DATABASE IF NOT EXISTS `y` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `y`;
 
 -- --------------------------------------------------------
 
@@ -28,21 +29,15 @@ SET time_zone = "+00:00";
 -- Table structure for table `accounts`
 --
 
+DROP TABLE IF EXISTS `accounts`;
 CREATE TABLE `accounts` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `name` varchar(32) NOT NULL,
   `password` varchar(61) NOT NULL,
-  `email` varchar(32) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `last_login` datetime NOT NULL
+  `email` varchar(32) CHARACTER SET tis620 COLLATE tis620_thai_ci DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_login` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=tis620;
-
---
--- Dumping data for table `accounts`
---
-
-INSERT INTO `accounts` (`id`, `name`, `password`, `email`, `created_at`, `last_login`) VALUES
-(11, 'John_Connor', '$2y$12$WLB0pzGmfXoJzJla7YtumeB3eut4Y37o2kIVPwRKfmxtBgdG1coku', '', '2020-10-08 15:40:35', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -50,22 +45,16 @@ INSERT INTO `accounts` (`id`, `name`, `password`, `email`, `created_at`, `last_l
 -- Table structure for table `characters`
 --
 
+DROP TABLE IF EXISTS `characters`;
 CREATE TABLE `characters` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `name` varchar(25) NOT NULL,
-  `account_id` bigint(20) UNSIGNED NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  `ip` varchar(18) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `logged_at` date NOT NULL
+  `account_id` bigint UNSIGNED NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `ip` varchar(18) CHARACTER SET tis620 COLLATE tis620_thai_ci DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `logged_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=tis620;
-
---
--- Dumping data for table `characters`
---
-
-INSERT INTO `characters` (`id`, `name`, `account_id`, `active`, `ip`, `created_at`, `logged_at`) VALUES
-(6, 'John_Connor', 11, 0, '', '2020-10-08 15:40:42', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -73,23 +62,17 @@ INSERT INTO `characters` (`id`, `name`, `account_id`, `active`, `ip`, `created_a
 -- Table structure for table `character_statuses`
 --
 
+DROP TABLE IF EXISTS `character_statuses`;
 CREATE TABLE `character_statuses` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `character_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `developer` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
-  `admin` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
-  `cash` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `vip` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
-  `level` smallint(5) UNSIGNED NOT NULL DEFAULT 0,
-  `skin` smallint(5) UNSIGNED NOT NULL DEFAULT 264
+  `id` bigint UNSIGNED NOT NULL,
+  `character_id` bigint UNSIGNED NOT NULL DEFAULT '0',
+  `developer` tinyint UNSIGNED NOT NULL DEFAULT '0',
+  `admin` tinyint UNSIGNED NOT NULL DEFAULT '0',
+  `cash` int UNSIGNED NOT NULL DEFAULT '0',
+  `vip` tinyint UNSIGNED NOT NULL DEFAULT '0',
+  `level` smallint UNSIGNED NOT NULL DEFAULT '0',
+  `skin` smallint UNSIGNED NOT NULL DEFAULT '264'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `character_statuses`
---
-
-INSERT INTO `character_statuses` (`id`, `character_id`, `developer`, `admin`, `cash`, `vip`, `level`, `skin`) VALUES
-(1, 6, 0, 0, 0, 0, 0, 264);
 
 -- --------------------------------------------------------
 
@@ -97,29 +80,30 @@ INSERT INTO `character_statuses` (`id`, `character_id`, `developer`, `admin`, `c
 -- Table structure for table `doors`
 --
 
+DROP TABLE IF EXISTS `doors`;
 CREATE TABLE `doors` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `name` varchar(31) NOT NULL,
-  `type` tinyint(3) UNSIGNED NOT NULL,
+  `type` tinyint UNSIGNED NOT NULL,
   `eX` float NOT NULL,
   `eY` float NOT NULL,
   `eZ` float NOT NULL,
   `eA` float NOT NULL,
-  `eInt` tinyint(3) UNSIGNED NOT NULL,
-  `eWorld` int(10) UNSIGNED NOT NULL,
+  `eInt` tinyint UNSIGNED NOT NULL,
+  `eWorld` int UNSIGNED NOT NULL,
   `eLabel` varchar(31) NOT NULL,
   `eGtext` varchar(31) NOT NULL,
-  `ePickupModel` int(10) NOT NULL,
+  `ePickupModel` int NOT NULL,
   `iX` float NOT NULL,
   `iY` float NOT NULL,
   `iZ` float NOT NULL,
   `iA` float NOT NULL,
-  `iInt` tinyint(3) UNSIGNED NOT NULL,
-  `iWorld` int(10) UNSIGNED NOT NULL,
+  `iInt` tinyint UNSIGNED NOT NULL,
+  `iWorld` int UNSIGNED NOT NULL,
   `iLabel` varchar(31) NOT NULL,
   `iGtext` varchar(31) NOT NULL,
-  `iPickupModel` int(10) NOT NULL,
-  `faction_id` bigint(20) UNSIGNED DEFAULT NULL
+  `iPickupModel` int NOT NULL,
+  `faction_id` bigint UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=tis620;
 
 --
@@ -167,19 +151,19 @@ ALTER TABLE `doors`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `characters`
 --
 ALTER TABLE `characters`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `character_statuses`
 --
 ALTER TABLE `character_statuses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

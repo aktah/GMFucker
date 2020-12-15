@@ -4,6 +4,7 @@
 
 #include <YSI_Core\y_utils>
 #include <YSI_Coding\y_inline>
+#include <YSI_Extra\y_inline_mysql>
 #include <YSI_Data\y_iterate>
 #include <YSI_Visual\y_dialog>
 #include <YSI_Visual\y_commands>
@@ -31,12 +32,6 @@ enum
     DOOR_TYPE_CP_INT
 }
 
-#define Y_DOOR_LIMIT				100
-#define	Y_DOOR_MAX_NAME				30
-#define	Y_DOOR_LABEL_TEXT_LIMIT		30
-#define	Y_DOOR_GTEXT_LIMIT			30
-#define Y_DOOR_DEFAULT_PICKUP 		1314
-#define Y_DOOR_WORLD_OFFSET  		2000
 #define DOOR_TABLE  "doors"
 
 enum E_DOOR

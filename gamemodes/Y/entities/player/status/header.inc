@@ -8,10 +8,12 @@ enum E_PLAYER_STATUS {
 	E_PLAYER_Status_secretkey[60 + 1],
 	E_PLAYER_Status_ip,
 	E_PLAYER_Status_cash,
+	E_PLAYER_Status_bank,
 	E_PLAYER_Status_vip,
 	E_PLAYER_Status_admin,
 	E_PLAYER_Status_skin,
 	E_PLAYER_Status_level,
+	bool:E_PLAYER_Status_tutorial,
 	bool:E_PLAYER_Status_developer
 }
 

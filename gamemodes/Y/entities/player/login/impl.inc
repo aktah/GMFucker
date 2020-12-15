@@ -62,7 +62,18 @@ ShowLoginDialog(playerid)
 			@return 1;
 		}
 
-		bcrypt_verify(playerid, "OnPassswordVerify", inputtext, Player.Auth[playerid][@password]);
+		inline const OnChecked(bool:success)
+		{
+			if(success) {
+				SelectCharacter(playerid);
+			} else {
+				attempt[playerid]++;
+				defer LoginNextAttempt[500](playerid);
+			}
+		}
+
+		BCrypt_CheckInline(inputtext, Player.Auth[playerid][@password], using inline OnChecked);
+		@return 1;
 	}
 
 	new body[256];
@@ -71,22 +82,11 @@ ShowLoginDialog(playerid)
 		format(body, sizeof body, "%s"WHITE"โปรดกรอกรหัสผ่านของคุณด้านล่างนี้เพื่อเข้าสู่ระบบ:\n\n"FIREBRICK"ความล้มเหลวในการเข้าสู่ระบบ (%d/%d)", error, attempt, Y_PLAYER_LOGIN_MAX_ATTEMPTS);
 	}
 	else {
-		format(body, sizeof body, "%s"WHITE"การเข้าสู่ระบบ "ORANGE"["WEBSITE_URL"]\n\n"WHITE"โปรดกรอกรหัสผ่านด้านล่างเพื่อเลือกตัวละครของท่าน", error);
+		format(body, sizeof body, "%s"WHITE"การเข้าสู่ระบบ "SERVER_COL"["WEBSITE_URL"]\n\n"WHITE"โปรดกรอกรหัสผ่านด้านล่างเพื่อเลือกตัวละครของท่าน\n- เปลี่ยนสกินตัวละครได้ที่หน้าเว็บไซต์ "SERVER_COL"(UCP)", error);
 	}
 
 	Dialog_ShowCallback(playerid, using inline HandleLogin, DIALOG_STYLE_PASSWORD, "ยินดีต้อนรับเข้าสู่ "SERVER_NAME"", body, "เข้าสู่ระบบ", "ออก");
 	return 1;
-}
-
-forward OnPassswordVerify(playerid, bool:success);
-public OnPassswordVerify(playerid, bool:success)
-{
-	if(success) {
-		SelectCharacter(playerid);
-	} else {
-		attempt[playerid]++;
-		defer LoginNextAttempt[500](playerid);
-	}
 }
 
 timer LoginCamera[100](playerid)

@@ -44,7 +44,7 @@ ShowRegistrationDialog(playerid, e_ERROR_PASSWORD:errorCode = e_ERROR_PASSWORD_N
 			@return 1;
 		}
 
-		CheckRegistrationPassword(playerid, inputtext);
+		@return CheckRegistrationPassword(playerid, inputtext);
 	}
 
 	new body[190];
@@ -74,26 +74,22 @@ CheckRegistrationPassword(playerid, password[])
 
 Register(playerid, const password[])
 {
-	bcrypt_hash(playerid, "OnPassswordHash", password, Y_BCRYPT_WORK_FACTOR);
-	return 1;
-}
-
-forward OnPassswordHash(playerid);
-public OnPassswordHash(playerid)
-{	
-	new dest[250];
-	bcrypt_get_hash(dest);
-	strcpy(Player.Auth[playerid][@password], dest);
-
-	new
-		query[320]
-	;
-	mysql_format(dbHandle, query, sizeof query, "INSERT INTO " PLAYER_TABLE " (name, password) VALUES ('%e', '%e')", Player.Auth[playerid][@name], Player.Auth[playerid][@password]);
-	
-	inline SavePlayer()
+	inline const OnHashed(string:result[])
 	{
-		Player.Auth[playerid][@id] = DBID:cache_insert_id();
-		call OnPlayerRegister(playerid);
+		strcpy(Player.Auth[playerid][@password], result);
+
+		new
+			query[320]
+		;
+		mysql_format(dbHandle, query, sizeof query, "INSERT INTO " PLAYER_TABLE " (name, password) VALUES ('%e', '%e')", Player.Auth[playerid][@name], Player.Auth[playerid][@password]);
+		
+		inline SavePlayer()
+		{
+			Player.Auth[playerid][@id] = DBID:cache_insert_id();
+			call OnPlayerRegister(playerid);
+		}
+		MySQL_TQueryInline(dbHandle, using inline SavePlayer, query);
 	}
-	MySQL_TQueryInline(dbHandle, using inline SavePlayer, query);
+	BCrypt_HashInline(password, Y_BCRYPT_WORK_FACTOR, using inline OnHashed);
+	return 1;
 }

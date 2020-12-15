@@ -4,3 +4,4 @@
 
 #include "player\impl"
 #include "vehicle\impl"
+#include "checkpoint\impl"

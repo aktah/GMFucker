@@ -8,11 +8,18 @@ hook OnGameModeInit()
 {
 	CreateAdminGroups();
 	Command_AddAlt(YCMD:setadminlevel, "sal");
+	Command_AddAlt(YCMD:adminhelp, "ahelp");
 }
 
 hook OnGroupInit()
 {
 	Group_AddChild(AdminGroup[0], DeveloperGroup);
+
+	GROUP_ADD<AdminGroup[0]>
+	{
+		@YCMD:adminhelp;
+		@YCMD:ahelp;
+	}
 
 	GROUP_ADD<AdminGroup[Y_PLAYER_ADMIN_MAX_LEVEL - 1]>
 	{
@@ -205,7 +212,7 @@ YCMD:spawncar(playerid, params[], help)
 	new Float:pX, Float:pY, Float:pZ;
 	GetPlayerPos(playerid, pX, pY, pZ);
 
-	new vehicleid = CreateCoreVehicle(modelid, pX, pY, pZ, 0, color1, color2, -1, siren, .engineState = true, .lightState = true, .lockState = true, .plate = "ADMIN VEHICLE");
+	new vehicleid = CreateCoreVehicle(modelid, pX, pY, pZ, 0, color1, color2, -1, siren, .engineState = true, .lightState = true, .lockState = false, .plate = "ADMIN VEHICLE");
 	
 	if(vehicleid > 0 && vehicleid != INVALID_VEHICLE_ID) {
 		Iter_Add(IAdminVehicle, vehicleid);
@@ -231,3 +238,31 @@ YCMD:despawncar(playerid, params[], help)
 	DestroyCoreVehicle(vehicleid);
 	return 1;
 }
+
+YCMD:adminhelp(playerid, params[], help)
+{
+	if(help) return SendClientMessage(playerid, -1, "Not supported");
+
+	if (IsAdminLevel(playerid, 1)) {
+		SendClientMessage(playerid, X11_SPRINGGREEN4,"__________คำสั่งแอดมิน__________");
+		SendClientMessage(playerid, X11_SKYBLUE,"/ahelp /aduty");
+	}
+
+	if (IsAdminLevel(playerid, Y_PLAYER_ADMIN_MANAGE_LEVEL)) {
+		SendClientMessage(playerid, X11_SKYBLUE,"/gopos /createdoor /doors /spawncar /despawncar");
+		SendClientMessage(playerid, X11_SKYBLUE, "/makehouse /gotohouse /gotohouseint");
+		SendClientMessage(playerid, X11_SKYBLUE, "/createfaction /changefowner");
+	}
+
+	if (IsAdminLevel(playerid, Y_PLAYER_ADMIN_MAX_LEVEL)) {
+		SendClientMessage(playerid, X11_SKYBLUE,"/sal");
+	}
+	return 1;
+}
+
+/**
+#define Y_PLAYER_ADMIN_MAX_LEVEL        5
+#define Y_PLAYER_ADMIN_MANAGE_LEVEL     4
+#define Y_PLAYER_ADMIN_LEAD_LEVEL       3
+#define Y_PLAYER_ADMIN_STAFF_LEVEL      2
+ */

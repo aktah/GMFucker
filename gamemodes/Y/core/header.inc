@@ -6,6 +6,7 @@
 #include <YSI_Players\y_groups>
 #include <YSI_Server\y_colours>
 #include <YSI_Visual\y_commands>
+#include <YSI_Coding\y_va>
 #include <YSI_Core\y_master>
 
 DEFINE_HOOK_REPLACEMENT(Damage, Dmg);

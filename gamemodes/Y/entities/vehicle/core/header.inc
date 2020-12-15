@@ -51,8 +51,25 @@ enum E_VEHICLE_DATA
 	bool:E_VEHICLE_Meta_lock,
 	bool:E_VEHICLE_Meta_light,
 	bool:E_VEHICLE_Meta_engine,
+    bool:E_VEHICLE_Meta_bonnet,
+    bool:E_VEHICLE_Meta_boot,
 	E_VEHICLE_Meta_mods[MAX_VEHICLE_COMPONENT_SLOT]
-}
+};
+
+enum Door
+{
+	DOOR_HOOD,
+	DOOR_TRUNK,
+	DOOR_DRIVER,
+	DOOR_PASSENGER
+};
+ 
+enum DoorState(<<= 1)
+{
+	IS_OPENED = 1,
+	IS_DAMAGED,
+	IS_REMOVED
+};
 
 new VehicleMeta[MAX_VEHICLES][E_VEHICLE_DATA];
 new Iterator:IVehicle<MAX_VEHICLES + 1>;

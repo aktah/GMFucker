@@ -259,15 +259,6 @@ hook OnPlayerInit(playerid)
 	TogglePlayerSpectating(playerid, false);
 }
 
-hook OnPlayerSpawn(playerid)
-{
-	SetPlayerSkin(playerid, Player.Status[playerid][@skin]);
-	SetPlayerPos(playerid, Y_DEFAULT_SPAWN_LOCATION_X, Y_DEFAULT_SPAWN_LOCATION_Y, Y_DEFAULT_SPAWN_LOCATION_Z);
-	SetPlayerInterior(playerid, Y_DEFAULT_SPAWN_INT);
-	SetPlayerVirtualWorld(playerid, Y_DEFAULT_SPAWN_WORLD);
-	return 1;
-}
-
 #if defined Y_PLAYER_IG_REGISTER_CHARACTER
 ShowCreateCharacterDialog(playerid, e_ERROR_CHARACTER:errorCode = e_ERROR_CHARACTER_NONE)
 {
@@ -277,13 +268,13 @@ ShowCreateCharacterDialog(playerid, e_ERROR_CHARACTER:errorCode = e_ERROR_CHARAC
 
 	if (errorCode != e_ERROR_CHARACTER_NONE) {
 		switch (errorCode) {
-			case e_ERROR_PASSWORD_EMPTY: {
+			case e_ERROR_CHARACTER_EMPTY: {
 				format(error, sizeof error, ""INDIANRED"ชื่อต้องไม่เป็นค่าว่าง\n\n");
 			}
-			case e_ERROR_PASSWORD_SHORT: {
+			case e_ERROR_CHARACTER_SHORT: {
 				format(error, sizeof error, ""INDIANRED"ชื่อต้องมีความยาวอย่างน้อย %d ตัวอักษร\n\n", Y_PLAYER_CHARACTER_NAME_MIN_PASS_LENGTH);
 			}
-			case e_ERROR_PASSWORD_LONG: {
+			case e_ERROR_CHARACTER_LONG: {
 				format(error, sizeof error, ""INDIANRED"ชื่อต้องมีความยาวสูงสุดแค่ %d ตัวอักษร\n\n", Y_PLAYER_CHARACTER_NAME_MAX_PASS_LENGTH);
 			}
 			case e_ERROR_CHARACTER_VALID_NAME: {
@@ -342,7 +333,7 @@ ShowCreateCharacterDialog(playerid, e_ERROR_CHARACTER:errorCode = e_ERROR_CHARAC
 				@return 1;
 			}
 			mysql_format(dbHandle, query, sizeof query, "INSERT INTO " CHARACTER_STATUS_TABLE " (character_id) VALUES (%d)", _:Player.Status[playerid][@id]);
-			MySQL_TQueryInline(dbHandle, using inline OnStatusCreated, query);
+			MySQL_PQueryInline(dbHandle, using inline OnStatusCreated, query);
 
 			@return 1;
 		}
@@ -352,7 +343,7 @@ ShowCreateCharacterDialog(playerid, e_ERROR_CHARACTER:errorCode = e_ERROR_CHARAC
 	}
 
 	new body[200];
-	format(body, sizeof body, "%s"WHITE"ความยาวต้องไม่ต่ำกว่า "FIREBRICK"%d"WHITE" หรือมากกว่า "FIREBRICK"%d\n"WHITE"ตัวอย่าง: "ORANGE"Michael_Willson\n\n"WHITE"ป้อนชื่อตัวละครด้านล่างนี้:", error, Y_PLAYER_CHARACTER_NAME_MIN_PASS_LENGTH, Y_PLAYER_CHARACTER_NAME_MAX_PASS_LENGTH);
+	format(body, sizeof body, "%s"WHITE"ความยาวต้องไม่ต่ำกว่า "INDIANRED"%d"WHITE" หรือมากกว่า "INDIANRED"%d\n"WHITE"ตัวอย่าง: "YELLOW"Michael_Willson\n\n"WHITE"ป้อนชื่อตัวละครด้านล่างนี้:", error, Y_PLAYER_CHARACTER_NAME_MIN_PASS_LENGTH, Y_PLAYER_CHARACTER_NAME_MAX_PASS_LENGTH);
 	Dialog_ShowCallback(playerid, using inline HandleCreationCharacter, DIALOG_STYLE_INPUT, "สร้างตัวละคร", body, "สร้าง", "");
 	return 1;
 }
