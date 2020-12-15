@@ -10,6 +10,7 @@
 #define MYSQL_LOG                       WARNING | ERROR
 #define MYSQL_POOL_SIZE                 5
 #define MYSQL_CHARSET 	                "tis620"
+#define SERVER_COL                      ORANGE
 
 #define SERVER_NAME                     "Server name Multiplayer"
 #define SERVER_ALIAS                    "SN:MP"
@@ -46,6 +47,7 @@
 #define Y_DEFAULT_SPAWN_WORLD           0
 #define Y_DEFAULT_SPAWN_INT             0
 
+#define Y_DEFAULT_WORLD_OFFSET      1000
 #define Y_DOOR_LIMIT				100
 #define	Y_DOOR_MAX_NAME				30
 #define	Y_DOOR_LABEL_TEXT_LIMIT		30
